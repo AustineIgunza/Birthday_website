@@ -360,6 +360,18 @@
             display: block;
             opacity: 1;
             pointer-events: auto;
+            animation: buttonSlideIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes buttonSlideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px) scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
 
         @media (max-width: 600px) {
@@ -728,8 +740,8 @@
             justify-content: center;
             align-items: center;
             gap: 2rem;
-            flex-wrap: wrap;
-            max-width: 1100px;
+            flex-wrap: nowrap;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
@@ -979,6 +991,45 @@
             pointer-events: none;
         }
 
+        .clickable-photo-text {
+            cursor: pointer;
+            color: var(--bright-pink);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 1rem 1.5rem;
+            border-bottom: 2px solid transparent;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: rgba(255, 105, 180, 0.08);
+            border-radius: 50px;
+            position: relative;
+            animation: float-gentle-no-tilt 3s ease-in-out infinite;
+        }
+
+        .clickable-photo-text::before {
+            content: attr(data-emoji);
+            font-size: 2rem;
+            animation: float-gentle 2s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        @media (hover: hover) {
+            .clickable-photo-text:hover {
+                color: var(--dark-pink);
+                background: rgba(255, 105, 180, 0.15);
+                transform: scale(1.08);
+                box-shadow: 0 8px 20px rgba(199, 21, 133, 0.2);
+            }
+
+            .clickable-photo-text:hover::before {
+                animation: float-gentle 1s ease-in-out infinite;
+            }
+        }
+
         @media (max-width: 768px) {
             .page2-heading h1 {
                 font-size: 1.8rem;
@@ -990,10 +1041,33 @@
 
             .gifts-wrapper {
                 gap: 1rem;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                overflow-y: hidden;
+                padding-bottom: 1rem;
+                scroll-behavior: smooth;
             }
 
             .gift-card {
                 max-width: 100%;
+                flex-shrink: 0;
+                width: calc(50% - 0.5rem);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gifts-wrapper {
+                gap: 0.8rem;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                overflow-y: hidden;
+                width: 100%;
+            }
+
+            .gift-card {
+                flex-shrink: 0;
+                width: calc(100vw - 4rem);
+                max-width: none;
             }
         }
 
@@ -1957,6 +2031,297 @@
             }
         }
 
+        /* ===== PAGE 7: FLOWER GAME PAGE ===== */
+        #page7 {
+            background: linear-gradient(135deg, #FFD6E8 0%, #FFC0D9 50%, #FFB6C1 100%);
+            overflow-y: auto;
+        }
+
+        .page7-content {
+            padding: 2rem;
+            min-height: auto;
+            display: flex;
+            flex-direction: column;
+            animation: pageTransitionIn 0.4s ease;
+            position: relative;
+            z-index: 100;
+        }
+
+        .page7-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--dark-pink);
+            text-align: center;
+            margin-bottom: 1rem;
+            margin-top: 1rem;
+            position: relative;
+            z-index: 100;
+        }
+
+        .game-instruction {
+            font-family: 'Lato', sans-serif;
+            font-size: 1.1rem;
+            color: var(--dark-pink);
+            text-align: center;
+            margin-bottom: 2rem;
+            font-style: italic;
+            position: relative;
+            z-index: 100;
+        }
+
+        .flower-game-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            height: 500px;
+            margin: 0 auto 2rem;
+            z-index: 100;
+        }
+
+        .flower {
+            position: absolute;
+            font-size: 3rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+            z-index: 100;
+        }
+
+        .flower:not(.disabled):hover {
+            transform: scale(1.2);
+            filter: drop-shadow(0 0 8px rgba(255, 105, 180, 0.6));
+        }
+
+        .flower.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            animation: fadeOut 0.4s ease;
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0.3;
+            }
+        }
+
+        @keyframes heartBeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            25% {
+                transform: scale(1.2);
+            }
+            50% {
+                transform: scale(1.4);
+            }
+            75% {
+                transform: scale(1.2);
+            }
+        }
+
+        .flower.correct {
+            animation: heartBeat 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        /* WIN POPUP */
+        .win-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: white;
+            border-radius: 25px;
+            padding: 3rem;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(199, 21, 133, 0.4);
+            z-index: 800;
+            animation: popupSlideIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            opacity: 0;
+        }
+
+        @keyframes popupSlideIn {
+            0% {
+                transform: translate(-50%, -50%) scale(0) rotateX(-30deg);
+                opacity: 0;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1) rotateX(0deg);
+                opacity: 1;
+            }
+        }
+
+        .win-popup.active {
+            display: block;
+        }
+
+        .win-heart {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: float-gentle 2s ease-in-out infinite;
+        }
+
+        .win-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--dark-pink);
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .win-message {
+            font-family: 'Lato', sans-serif;
+            font-size: 1.2rem;
+            color: var(--normal-pink);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .win-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .win-button {
+            padding: 0.8rem 1.5rem;
+            border-radius: 20px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Lato', sans-serif;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .win-button.primary {
+            background: var(--bright-pink);
+            color: white;
+        }
+
+        .win-button.primary:hover {
+            transform: scale(1.08);
+            box-shadow: 0 6px 20px rgba(255, 20, 147, 0.4);
+        }
+
+        .win-button.secondary {
+            background: rgba(199, 21, 133, 0.1);
+            color: var(--dark-pink);
+            border: 2px solid var(--dark-pink);
+        }
+
+        .win-button.secondary:hover {
+            background: rgba(199, 21, 133, 0.2);
+            transform: scale(1.08);
+        }
+
+        .win-popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 700;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .win-popup-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .page7-heading {
+                font-size: 1.8rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .game-instruction {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .flower-game-container {
+                height: 400px;
+                max-width: 100%;
+            }
+
+            .flower {
+                font-size: 2.5rem;
+            }
+
+            .win-popup {
+                padding: 2rem;
+            }
+
+            .win-heart {
+                font-size: 3rem;
+            }
+
+            .win-title {
+                font-size: 1.6rem;
+            }
+
+            .win-message {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page7-heading {
+                font-size: 1.4rem;
+            }
+
+            .game-instruction {
+                font-size: 0.95rem;
+            }
+
+            .flower-game-container {
+                height: 350px;
+            }
+
+            .flower {
+                font-size: 2rem;
+            }
+
+            .win-popup {
+                padding: 1.5rem;
+                width: 85%;
+            }
+
+            .win-heart {
+                font-size: 2.5rem;
+            }
+
+            .win-title {
+                font-size: 1.4rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .win-message {
+                font-size: 0.95rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .win-buttons {
+                gap: 0.8rem;
+            }
+
+            .win-button {
+                padding: 0.7rem 1.2rem;
+                font-size: 0.9rem;
+            }
+        }
+
         /* ===== UTILITIES ===== */
         .hidden {
             display: none !important;
@@ -2044,12 +2409,12 @@
                         <div class="gift-card-title">✨ A Surprise</div>
                         <p class="gift-card-text">Tap to reveal the magic 🎉</p>
                     </div>
-                    <div class="gift-card" onclick="goToPage6()">
+                    <div class="gift-card" onclick="goToPage7()">
                         <div class="gift-card-icon">
-                            <div style="font-size: 4rem; animation: float-gentle 2.5s ease-in-out infinite;">🎁</div>
+                            <div style="font-size: 4rem; animation: float-gentle 2.5s ease-in-out infinite;">�</div>
                         </div>
-                        <div class="gift-card-title">💝 My Wishes</div>
-                        <p class="gift-card-text">Tap to discover my blessings 🙏</p>
+                        <div class="gift-card-title">🎮 A Game</div>
+                        <p class="gift-card-text">Tap to find my heart �</p>
                     </div>
                 </div>
             </div>
@@ -2259,6 +2624,28 @@
                 <button class="btn btn-primary" onclick="goToPage2()" style="margin-top: 3rem;">Back to Gifts 💝</button>
             </div>
         </div>
+
+        <!-- PAGE 7: FLOWER GAME PAGE -->
+        <div class="page" id="page7">
+            <div class="page5-stars" id="page7Stars"></div>
+            <div class="page7-content">
+                <h2 class="page7-heading">🌸 Find My Heart 🌸</h2>
+                <p class="game-instruction">Tap the RIGHT flower to reveal my heart! 💕</p>
+                <div class="flower-game-container" id="flowerGameContainer"></div>
+            </div>
+        </div>
+
+        <!-- WIN POPUP -->
+        <div class="win-popup-overlay" id="winPopupOverlay"></div>
+        <div class="win-popup" id="winPopup">
+            <div class="win-heart">💕</div>
+            <div class="win-title">YAAAY! 🎉</div>
+            <div class="win-message">You've won my heart is all yours now and forever</div>
+            <div class="win-buttons">
+                <button class="win-button primary" onclick="playGameAgain()">Play Again 🎮</button>
+                <button class="win-button secondary" onclick="goToPage2()">Back to Gifts 💝</button>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -2342,6 +2729,11 @@
                 resetWishes();
             }
 
+            // Reset flower game when leaving page 7
+            if (pageId !== 'page7') {
+                resetFlowerGame();
+            }
+
             // Control floating hearts visibility
             const floatingHearts = document.getElementById('floatingHeartsContainer');
             if (pageId === 'page2') {
@@ -2364,6 +2756,8 @@
                 createPageStars('page4Stars');
             } else if (pageId === 'page6') {
                 createPageStars('page6Stars');
+            } else if (pageId === 'page7') {
+                createPageStars('page7Stars');
             }
 
             // Scroll to top
@@ -2399,6 +2793,12 @@
             createPageStars('page6Stars');
         }
 
+        function goToPage7() {
+            showPage('page7');
+            createPageStars('page7Stars');
+            initializeFlowerGame();
+        }
+
         // ===== WISHES PAGE FUNCTIONS =====
         function revealWish(element) {
             if (!element.classList.contains('revealed')) {
@@ -2416,6 +2816,109 @@
             wishBoxes.forEach(box => {
                 box.classList.remove('revealed');
             });
+        }
+
+        // ===== FLOWER GAME FUNCTIONS =====
+        let correctFlowerIndex = -1;
+        let gameActive = true;
+
+        function initializeFlowerGame() {
+            const container = document.getElementById('flowerGameContainer');
+            if (!container) return;
+
+            container.innerHTML = '';
+            gameActive = true;
+            correctFlowerIndex = Math.floor(Math.random() * 20);
+
+            // Create 20 flowers arranged in heart shape
+            const flowerPositions = generateHeartShape();
+
+            flowerPositions.forEach((pos, index) => {
+                const flower = document.createElement('div');
+                flower.className = 'flower';
+                flower.textContent = '🌸';
+                flower.style.left = pos.x + '%';
+                flower.style.top = pos.y + '%';
+                flower.style.transform = 'translate(-50%, -50%)';
+                flower.dataset.index = index;
+
+                flower.addEventListener('click', () => handleFlowerClick(index, flower));
+                container.appendChild(flower);
+            });
+        }
+
+        function generateHeartShape() {
+            // Generate 20 points in a heart shape
+            const points = [];
+            const scaleX = 35;
+            const scaleY = 40;
+            const offsetX = 50;
+            const offsetY = 45;
+
+            for (let i = 0; i < 20; i++) {
+                const angle = (i / 20) * Math.PI * 2;
+                let x, y;
+
+                // Heart shape formula
+                x = 16 * Math.sin(angle) ** 3;
+                y = 13 * Math.cos(angle) - 5 * Math.cos(2 * angle) - 2 * Math.cos(3 * angle) - Math.cos(4 * angle);
+
+                points.push({
+                    x: offsetX + (x * scaleX),
+                    y: offsetY - (y * scaleY)
+                });
+            }
+
+            return points;
+        }
+
+        function handleFlowerClick(index, element) {
+            if (!gameActive) return;
+
+            if (index === correctFlowerIndex) {
+                // Correct flower - show win popup
+                gameActive = false;
+                element.classList.add('correct');
+                
+                setTimeout(() => {
+                    showWinPopup();
+                }, 600);
+            } else {
+                // Wrong flower - fade and disable
+                element.classList.add('disabled');
+                element.style.pointerEvents = 'none';
+            }
+        }
+
+        function showWinPopup() {
+            const overlay = document.getElementById('winPopupOverlay');
+            const popup = document.getElementById('winPopup');
+            
+            overlay.classList.add('active');
+            popup.classList.add('active');
+        }
+
+        function hideWinPopup() {
+            const overlay = document.getElementById('winPopupOverlay');
+            const popup = document.getElementById('winPopup');
+            
+            overlay.classList.remove('active');
+            popup.classList.remove('active');
+        }
+
+        function playGameAgain() {
+            hideWinPopup();
+            initializeFlowerGame();
+        }
+
+        function resetFlowerGame() {
+            const container = document.getElementById('flowerGameContainer');
+            if (!container) return;
+
+            container.innerHTML = '';
+            gameActive = false;
+            correctFlowerIndex = -1;
+            hideWinPopup();
         }
 
         // ===== PHOTO MODAL FUNCTIONS =====
