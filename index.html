@@ -1744,6 +1744,192 @@
             }
         }
 
+        /* ===== PAGE 6: WISHES PAGE ===== */
+        #page6 {
+            background: linear-gradient(135deg, #FFD6E8 0%, #FFC0D9 50%, #FFB6C1 100%);
+            overflow-y: auto;
+        }
+
+        .page6-content {
+            padding: 2rem;
+            min-height: auto;
+            display: flex;
+            flex-direction: column;
+            animation: pageTransitionIn 0.4s ease;
+            position: relative;
+            z-index: 100;
+        }
+
+        .page6-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--dark-pink);
+            text-align: center;
+            margin-bottom: 2rem;
+            margin-top: 1rem;
+            position: relative;
+            z-index: 100;
+        }
+
+        .wishes-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
+            z-index: 100;
+        }
+
+        @keyframes wishBoxFlip {
+            0% {
+                opacity: 0;
+                transform: rotateY(-90deg) scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: rotateY(0deg) scale(1);
+            }
+        }
+
+        @keyframes wishBoxPulse {
+            0%, 100% {
+                box-shadow: 0 4px 12px rgba(199, 21, 133, 0.2);
+            }
+            50% {
+                box-shadow: 0 8px 24px rgba(199, 21, 133, 0.4);
+            }
+        }
+
+        .wish-box {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            text-align: center;
+            position: relative;
+            z-index: 100;
+            min-height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(199, 21, 133, 0.2);
+            animation: fadeInStaggered 0.6s ease forwards;
+        }
+
+        .wish-box:nth-child(1) { animation-delay: 0s; }
+        .wish-box:nth-child(2) { animation-delay: 0.1s; }
+        .wish-box:nth-child(3) { animation-delay: 0.2s; }
+        .wish-box:nth-child(4) { animation-delay: 0.3s; }
+        .wish-box:nth-child(5) { animation-delay: 0.4s; }
+        .wish-box:nth-child(6) { animation-delay: 0.5s; }
+
+        .wish-box:not(.revealed) {
+            background: linear-gradient(135deg, #FF69B4, #FF1493);
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .wish-box:not(.revealed):hover {
+            transform: scale(1.05) rotateY(5deg);
+            box-shadow: 0 10px 30px rgba(199, 21, 133, 0.4);
+        }
+
+        .wish-box.revealed {
+            background: linear-gradient(135deg, #FFF0F5, #FFE4E1);
+            border: 2px solid var(--light-pink);
+        }
+
+        .wish-box-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .wish-box-label {
+            font-size: 1rem;
+        }
+
+        .wish-box-content {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--dark-pink);
+            line-height: 1.6;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .wish-box.revealed .wish-box-content {
+            opacity: 1;
+            max-height: 500px;
+        }
+
+        .wish-box.revealed .wish-box-prompt {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .page6-heading {
+                font-size: 1.8rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .wishes-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .wish-box {
+                min-height: 150px;
+                padding: 1.2rem;
+            }
+
+            .wish-box-emoji {
+                font-size: 2rem;
+            }
+
+            .wish-box-label {
+                font-size: 0.95rem;
+            }
+
+            .wish-box-content {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page6-heading {
+                font-size: 1.4rem;
+            }
+
+            .wishes-grid {
+                gap: 0.8rem;
+            }
+
+            .wish-box {
+                min-height: 130px;
+                padding: 1rem;
+            }
+
+            .wish-box-emoji {
+                font-size: 1.8rem;
+                margin-bottom: 0.3rem;
+            }
+
+            .wish-box-label {
+                font-size: 0.85rem;
+            }
+
+            .wish-box-content {
+                font-size: 0.95rem;
+            }
+        }
+
         /* ===== UTILITIES ===== */
         .hidden {
             display: none !important;
@@ -1827,6 +2013,13 @@
                         </div>
                         <div class="gift-card-title">✨ A Surprise</div>
                         <p class="gift-card-text">Tap to reveal the magic 🎉</p>
+                    </div>
+                    <div class="gift-card" onclick="goToPage6()">
+                        <div class="gift-card-icon">
+                            <div style="font-size: 4rem; animation: float-gentle 2.5s ease-in-out infinite;">🎁</div>
+                        </div>
+                        <div class="gift-card-title">💝 My Wishes</div>
+                        <p class="gift-card-text">Tap to discover my blessings 🙏</p>
                     </div>
                 </div>
             </div>
@@ -1983,6 +2176,59 @@
                 <button class="btn btn-primary" onclick="goToPage1()" style="margin-top: 2rem;">Show Me Again 💕</button>
             </div>
         </div>
+
+        <!-- PAGE 6: WISHES PAGE -->
+        <div class="page" id="page6">
+            <div class="page5-stars" id="page6Stars"></div>
+            <div class="page6-content">
+                <h2 class="page6-heading">💫 My Wishes For You 💫</h2>
+                <div class="wishes-grid">
+                    <div class="wish-box" onclick="revealWish(this)">
+                        <div class="wish-box-prompt">
+                            <div class="wish-box-emoji">💝</div>
+                            <div class="wish-box-label">Tap me!</div>
+                        </div>
+                        <div class="wish-box-content">I wish you have a lovely day filled with love and laughter 💕</div>
+                    </div>
+                    <div class="wish-box" onclick="revealWish(this)">
+                        <div class="wish-box-prompt">
+                            <div class="wish-box-emoji">👑</div>
+                            <div class="wish-box-label">Tap me!</div>
+                        </div>
+                        <div class="wish-box-content">I wish that you will be successful in everything you set your mind to and believe that you are a conqueror through Christ 💪✨</div>
+                    </div>
+                    <div class="wish-box" onclick="revealWish(this)">
+                        <div class="wish-box-prompt">
+                            <div class="wish-box-emoji">🌟</div>
+                            <div class="wish-box-label">Tap me!</div>
+                        </div>
+                        <div class="wish-box-content">I wish you a full long life filled with good health, wealth and happiness 🏥💰😊</div>
+                    </div>
+                    <div class="wish-box" onclick="revealWish(this)">
+                        <div class="wish-box-prompt">
+                            <div class="wish-box-emoji">☮️</div>
+                            <div class="wish-box-label">Tap me!</div>
+                        </div>
+                        <div class="wish-box-content">I wish you endless peace, comfort and enjoyment in all areas of your life 🕊️💤</div>
+                    </div>
+                    <div class="wish-box" onclick="revealWish(this)">
+                        <div class="wish-box-prompt">
+                            <div class="wish-box-emoji">✝️</div>
+                            <div class="wish-box-label">Tap me!</div>
+                        </div>
+                        <div class="wish-box-content">I wish you a strong and fruitful spiritual journey as you grow closer to God 🙏💖</div>
+                    </div>
+                    <div class="wish-box" onclick="revealWish(this)">
+                        <div class="wish-box-prompt">
+                            <div class="wish-box-emoji">💕</div>
+                            <div class="wish-box-label">Tap me!</div>
+                        </div>
+                        <div class="wish-box-content">I wish us an endless love crafted and ordained by Jesus 👼💕✨</div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="goToPage2()" style="margin-top: 3rem;">Back to Gifts 💝</button>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -2104,7 +2350,15 @@
             showPage('page5');
         }
 
-        // ===== PHOTO MODAL FUNCTIONS =====
+        function goToPage6() {
+            showPage('page6');
+            createPageStars('page6Stars');
+        }
+
+        // ===== WISHES PAGE FUNCTIONS =====
+        function revealWish(element) {
+            element.classList.add('revealed');
+        }
         const photoData = {
             1: {
                 image: './photos/birthday_image_1.JPG.jpeg',
