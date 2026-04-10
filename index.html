@@ -1173,74 +1173,55 @@
         }
 
         .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            max-width: 900px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+            max-width: 600px;
             margin: 0 auto;
             width: 100%;
-            justify-items: center;
+            align-items: center;
             position: relative;
             z-index: 100;
         }
 
         .photo-card {
-            background: var(--light-pink);
+            background: transparent;
             border: none;
-            border-radius: 4px;
-            box-shadow: 0 4px 12px rgba(199, 21, 133, 0.15);
-            width: 100%;
-            max-width: 320px;
+            border-radius: 0;
+            box-shadow: none;
+            width: auto;
+            max-width: none;
             cursor: pointer;
             transition: all 0.3s ease;
             animation: fadeInStaggered 0.6s ease forwards;
             opacity: 1;
-            transform: rotate(-2deg);
-            overflow: hidden;
+            transform: translateY(0);
+            overflow: visible;
             position: relative;
             z-index: 100;
-            padding: 12px;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .photo-card:nth-child(1) { animation-delay: 0s; }
-        .photo-card:nth-child(2) { animation-delay: 0.15s; transform: rotate(1.5deg); }
-        .photo-card:nth-child(3) { animation-delay: 0.3s; transform: rotate(-1.2deg); }
-        .photo-card:nth-child(4) { animation-delay: 0.45s; transform: rotate(1deg); }
-        .photo-card:nth-child(5) { animation-delay: 0.6s; transform: rotate(-1.5deg); }
+        .photo-card:nth-child(2) { animation-delay: 0.15s; }
+        .photo-card:nth-child(3) { animation-delay: 0.3s; }
+        .photo-card:nth-child(4) { animation-delay: 0.45s; }
+        .photo-card:nth-child(5) { animation-delay: 0.6s; }
 
         .photo-card:hover {
-            transform: rotate(0deg) translateY(-8px);
-            box-shadow: 0 12px 28px rgba(199, 21, 133, 0.25);
+            transform: scale(1.05);
+            box-shadow: none;
         }
         .photo-image {
-            width: 100%;
-            height: 280px;
-            background: linear-gradient(135deg, #FFB6C1, #FF69B4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: white;
-            position: relative;
-            overflow: hidden;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            border: none;
-            box-sizing: border-box;
+            display: none;
         }
 
-        /* REPLACE with your photo URL here */
-        /* .photo-image { background-image: url('your-photo-url'); background-size: cover; background-position: center; } */
-
         .photo-caption {
-            padding: 1.2rem;
-            text-align: center;
-            font-family: 'Lato', sans-serif;
-            font-style: italic;
-            color: var(--dark-pink);
-            font-size: 0.9rem;
-            line-height: 1.5;
+            display: none;
         }
 
         @media (max-width: 768px) {
@@ -1250,8 +1231,13 @@
             }
 
             .gallery-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
+                gap: 1.2rem;
+                max-width: 100%;
+            }
+
+            .clickable-photo-text {
+                padding: 0.8rem 1.2rem;
+                font-size: 1.2rem;
             }
 
             .photo-image {
@@ -1496,7 +1482,12 @@
 
             .photo-card {
                 max-width: 100%;
-                padding: 10px;
+                padding: 0;
+            }
+
+            .clickable-photo-text {
+                padding: 0.7rem 1rem;
+                font-size: 1.1rem;
             }
 
             .photo-image {
@@ -1694,14 +1685,36 @@
             color: var(--bright-pink);
             font-weight: 600;
             transition: all 0.3s ease;
-            padding: 0.5rem 0;
+            padding: 1rem 1.5rem;
             border-bottom: 2px solid transparent;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: rgba(255, 105, 180, 0.08);
+            border-radius: 50px;
+            position: relative;
+            animation: float-gentle-no-tilt 3s ease-in-out infinite;
+        }
+
+        .clickable-photo-text::before {
+            content: attr(data-emoji);
+            font-size: 2rem;
+            animation: float-gentle 2s ease-in-out infinite;
+            display: inline-block;
         }
 
         .clickable-photo-text:hover {
             color: var(--dark-pink);
-            border-bottom-color: var(--bright-pink);
-            transform: translateY(-2px);
+            background: rgba(255, 105, 180, 0.15);
+            transform: scale(1.08);
+            box-shadow: 0 8px 20px rgba(199, 21, 133, 0.2);
+        }
+
+        .clickable-photo-text:hover::before {
+            animation: float-gentle 1s ease-in-out infinite;
         }
 
         @media (max-width: 768px) {
@@ -1923,19 +1936,19 @@
                 <h2 class="page4-heading">Our Favourite Moments 📸 💕</h2>
                 <div class="gallery-grid">
                     <div class="photo-card">
-                        <span class="clickable-photo-text" onclick="openPhotoModal(1)">First of many</span>
+                        <span class="clickable-photo-text" data-emoji="💕" onclick="openPhotoModal(1)">First of many</span>
                     </div>
                     <div class="photo-card">
-                        <span class="clickable-photo-text" onclick="openPhotoModal(2)">a night was had</span>
+                        <span class="clickable-photo-text" data-emoji="🌙" onclick="openPhotoModal(2)">a night was had</span>
                     </div>
                     <div class="photo-card">
-                        <span class="clickable-photo-text" onclick="openPhotoModal(3)">In the woods</span>
+                        <span class="clickable-photo-text" data-emoji="🌲" onclick="openPhotoModal(3)">In the woods</span>
                     </div>
                     <div class="photo-card">
-                        <span class="clickable-photo-text" onclick="openPhotoModal(4)">double trouble</span>
+                        <span class="clickable-photo-text" data-emoji="👯" onclick="openPhotoModal(4)">double trouble</span>
                     </div>
                     <div class="photo-card">
-                        <span class="clickable-photo-text" onclick="openPhotoModal(5)">my favorite</span>
+                        <span class="clickable-photo-text" data-emoji="⭐" onclick="openPhotoModal(5)">my favorite</span>
                     </div>
                 </div>
             </div>
