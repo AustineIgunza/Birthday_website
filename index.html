@@ -7,7 +7,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#FFB6C1">
     <title>Happy Birthday Imani 🎂💕</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Lato:ital,wght@0,400;0,700;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -453,17 +453,18 @@
         }
 
         .page1-small-text {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            font-style: italic;
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            font-style: normal;
             color: var(--normal-pink);
             margin-bottom: 1rem;
+            font-weight: 400;
         }
 
         .page1-heading {
-            font-family: 'Playfair Display', serif;
-            font-size: 4.5rem;
-            font-weight: 700;
+            font-family: 'Great Vibes', cursive;
+            font-size: 5rem;
+            font-weight: 400;
             color: var(--dark-pink);
             margin-bottom: 1rem;
             animation: pulse 2s ease-in-out infinite;
@@ -486,10 +487,11 @@
         }
 
         .page1-subtext {
-            font-family: 'Lato', sans-serif;
-            font-size: 1.2rem;
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.5rem;
             color: var(--dark-pink);
             margin-bottom: 2.5rem;
+            font-weight: 400;
         }
 
         .page1-buttons {
@@ -703,6 +705,7 @@
             overflow-y: auto;
             position: relative;
             z-index: 100;
+            padding-bottom: 6rem;
         }
 
         .page2-heading {
@@ -712,37 +715,44 @@
         }
 
         .page2-heading h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            font-weight: 700;
+            font-family: 'Great Vibes', cursive;
+            font-size: 3rem;
+            font-weight: 400;
             color: var(--dark-pink);
             margin: 0 0 0.5rem 0;
         }
 
         .page2-subtext {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
-            font-style: italic;
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.5rem;
+            font-style: normal;
             color: var(--normal-pink);
             margin: 0 0 0.3rem 0;
+            font-weight: 400;
         }
 
         .page2-love {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
-            font-style: italic;
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.4rem;
+            font-style: normal;
             color: var(--bright-pink);
             margin: 0;
+            font-weight: 400;
         }
 
         .gifts-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
-            flex-wrap: nowrap;
-            max-width: 1400px;
-            margin: 0 auto;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            padding: 0 2rem;
+        }
+        
+        .gifts-wrapper .gift-card:nth-child(5) {
+            grid-column: 1 / -1;
+            justify-self: center;
+            max-width: 300px;
         }
 
         .gift-card {
@@ -793,9 +803,9 @@
         }
 
         .gift-card-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.8rem;
+            font-weight: 400;
             color: var(--dark-pink);
             margin-bottom: 0.5rem;
             margin-top: 0.5rem;
@@ -1040,34 +1050,35 @@
             }
 
             .gifts-wrapper {
+                grid-template-columns: 1fr;
                 gap: 1rem;
-                flex-wrap: nowrap;
-                overflow-x: auto;
-                overflow-y: hidden;
-                padding-bottom: 1rem;
-                scroll-behavior: smooth;
+                max-width: 400px;
+                padding: 0 1rem;
+            }
+            
+            .gifts-wrapper .gift-card:nth-child(3) {
+                grid-column: auto;
             }
 
             .gift-card {
                 max-width: 100%;
-                flex-shrink: 0;
-                width: calc(50% - 0.5rem);
             }
         }
 
         @media (max-width: 480px) {
             .gifts-wrapper {
+                grid-template-columns: 1fr;
                 gap: 0.8rem;
-                flex-wrap: nowrap;
-                overflow-x: auto;
-                overflow-y: hidden;
-                width: 100%;
+                max-width: 100%;
+                padding: 0 1rem;
+            }
+            
+            .gifts-wrapper .gift-card:nth-child(3) {
+                grid-column: auto;
             }
 
             .gift-card {
-                flex-shrink: 0;
-                width: calc(100vw - 4rem);
-                max-width: none;
+                max-width: 100%;
             }
         }
 
@@ -2078,13 +2089,40 @@
             z-index: 100;
         }
 
+        @media (max-width: 768px) {
+            .flower-game-container {
+                max-width: 400px;
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .flower-game-container {
+                max-width: 350px;
+                height: 350px;
+                margin: 0 auto 1rem;
+            }
+        }
+
         .flower {
             position: absolute;
-            font-size: 3rem;
+            font-size: 3.5rem;
             cursor: pointer;
             transition: all 0.2s ease;
             user-select: none;
             z-index: 100;
+            width: 4rem;
+            height: 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        @media (max-width: 480px) {
+            .flower {
+                font-size: 3rem;
+            }
         }
 
         .flower:not(.disabled):hover {
@@ -2140,8 +2178,9 @@
             text-align: center;
             box-shadow: 0 20px 60px rgba(199, 21, 133, 0.4);
             z-index: 800;
-            animation: popupSlideIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
             opacity: 0;
+            pointer-events: none;
+            display: none;
         }
 
         @keyframes popupSlideIn {
@@ -2157,6 +2196,8 @@
 
         .win-popup.active {
             display: block;
+            animation: popupSlideIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            pointer-events: auto;
         }
 
         .win-heart {
@@ -2173,6 +2214,16 @@
             font-style: italic;
         }
 
+        .win-popup-image {
+            max-width: 100%;
+            height: auto;
+            max-height: 300px;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            object-fit: cover;
+            box-shadow: 0 8px 24px rgba(199, 21, 133, 0.2);
+        }
+
         .win-message {
             font-family: 'Lato', sans-serif;
             font-size: 1.2rem;
@@ -2180,6 +2231,16 @@
             line-height: 1.8;
             margin-bottom: 2rem;
             font-weight: 500;
+        }
+        
+        .win-message p {
+            margin: 0;
+        }
+        
+        .win-message p:first-child {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark-pink);
         }
 
         .win-buttons {
@@ -2211,13 +2272,13 @@
         }
 
         .win-button.secondary {
-            background: rgba(199, 21, 133, 0.1);
+            background: transparent;
             color: var(--dark-pink);
             border: 2px solid var(--dark-pink);
         }
 
         .win-button.secondary:hover {
-            background: rgba(199, 21, 133, 0.2);
+            background: rgba(199, 21, 133, 0.15);
             transform: scale(1.08);
         }
 
@@ -2232,11 +2293,13 @@
             z-index: 700;
             opacity: 0;
             transition: opacity 0.3s ease;
+            pointer-events: none;
         }
 
         .win-popup-overlay.active {
             display: block;
             opacity: 1;
+            pointer-events: auto;
         }
 
         @media (max-width: 768px) {
@@ -2373,7 +2436,7 @@
             <div class="page5-stars" id="page2Stars"></div>
             <div class="page2-content">
                 <div class="page2-heading">
-                    <h1>🎁 Your Gifts 🎁</h1>
+                    <h1>🎁 These are for you... 🎁</h1>
                     <p class="page2-subtext">Only the best for my princess 👑</p>
                     <p class="page2-love">I love you so much 💕💕💕</p>
                 </div>
@@ -2396,6 +2459,20 @@
                         <div class="gift-card-title">📸 Our Moments</div>
                         <p class="gift-card-text">Tap to see our memories ✨</p>
                     </div>
+                    <div class="gift-card" onclick="goToPage6()">
+                        <div class="gift-card-icon">
+                            <div style="font-size: 4rem; animation: float-gentle 2.5s ease-in-out infinite;">💫</div>
+                        </div>
+                        <div class="gift-card-title">💌 My Wishes</div>
+                        <p class="gift-card-text">Tap to see my wishes 💕</p>
+                    </div>
+                    <div class="gift-card" onclick="goToPage7()">
+                        <div class="gift-card-icon">
+                            <div style="font-size: 4rem; animation: float-gentle 2.5s ease-in-out infinite;">🌸</div>
+                        </div>
+                        <div class="gift-card-title">🌷 Play a game</div>
+                        <p class="gift-card-text">Tap to get a gem 💎</p>
+                    </div>
                     <div class="gift-card" onclick="goToPage5()">
                         <div class="gift-card-icon">
                             <div class="stars-box">
@@ -2409,14 +2486,8 @@
                         <div class="gift-card-title">✨ A Surprise</div>
                         <p class="gift-card-text">Tap to reveal the magic 🎉</p>
                     </div>
-                    <div class="gift-card" onclick="goToPage7()">
-                        <div class="gift-card-icon">
-                            <div style="font-size: 4rem; animation: float-gentle 2.5s ease-in-out infinite;">�</div>
-                        </div>
-                        <div class="gift-card-title">🎮 A Game</div>
-                        <p class="gift-card-text">Tap to find my heart �</p>
-                    </div>
                 </div>
+                <button class="btn btn-primary" onclick="goToPage1()" style="margin-top: 2rem; display: block; margin-left: auto; margin-right: auto;">Ask Me Again 💕</button>
             </div>
         </div>
 
@@ -2490,7 +2561,6 @@
                 </div>
             </div>
         </div>
-        </div>
 
         <!-- PAGE 3: LOVE LETTER PAGE -->
         <div class="page" id="page3">
@@ -2561,9 +2631,11 @@
                 <div class="surprise-preamble">And for hubby's gift to you... 💝</div>
                 <div class="surprise-card">
                     <div class="surprise-emoji">🍽️</div>
-                    <div class="surprise-title">Three Course Dinner</div>
-                    <div class="surprise-venue">Glee Hotel</div>
-                    <div class="surprise-time">Time: Hubby will pick you up at 6 🚗💕</div>
+                    <div class="surprise-title">Birthday Dinner</div>
+                    <div class="surprise-venue">Three Course Meal</div>
+                    <div class="surprise-time">Location: Glee Hotel</div>
+                    <div class="surprise-time">Date: 18th April, 2026</div>
+                    <div class="surprise-time">Hubby will pick you up at 6 🚗💕</div>
                     <div class="surprise-divider"></div>
                     <div class="surprise-vibe">✨ Classy & Fine Dining ✨</div>
                     <div class="surprise-special">And a special surprise to end the night...</div>
@@ -2629,8 +2701,8 @@
         <div class="page" id="page7">
             <div class="page5-stars" id="page7Stars"></div>
             <div class="page7-content">
-                <h2 class="page7-heading">🌸 Find My Heart 🌸</h2>
-                <p class="game-instruction">Tap the RIGHT flower to reveal my heart! 💕</p>
+                <h2 class="page7-heading">🌸 Pick The Right Flower 🌸</h2>
+                <p class="game-instruction">Tap any flower and see how fast you can find the surprise 🎁</p>
                 <div class="flower-game-container" id="flowerGameContainer"></div>
             </div>
         </div>
@@ -2638,9 +2710,13 @@
         <!-- WIN POPUP -->
         <div class="win-popup-overlay" id="winPopupOverlay"></div>
         <div class="win-popup" id="winPopup">
-            <div class="win-heart">💕</div>
-            <div class="win-title">YAAAY! 🎉</div>
-            <div class="win-message">You've won my heart is all yours now and forever</div>
+            <div class="win-heart">💕✨💕</div>
+            <div class="win-title">YAAAY!! 🎉 You've Won! 🎉</div>
+            <img src="photos/birthday_image_6.JPG.jpeg" alt="Birthday Gift" class="win-popup-image" />
+            <div class="win-message">
+                <p>My heart is all yours my darling 💑</p>
+                <p style="margin-top: 1rem; font-style: italic; color: var(--normal-pink);">But let's be fr it took me way less time to realize you were the one for me 😘💕</p>
+            </div>
             <div class="win-buttons">
                 <button class="win-button primary" onclick="playGameAgain()">Play Again 🎮</button>
                 <button class="win-button secondary" onclick="goToPage2()">Back to Gifts 💝</button>
@@ -2842,31 +2918,63 @@
                 flower.style.transform = 'translate(-50%, -50%)';
                 flower.dataset.index = index;
 
-                flower.addEventListener('click', () => handleFlowerClick(index, flower));
+                flower.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const flowerIndex = parseInt(e.currentTarget.dataset.index);
+                    handleFlowerClick(flowerIndex, e.currentTarget);
+                });
                 container.appendChild(flower);
             });
         }
 
         function generateHeartShape() {
-            // Generate 20 points in a heart shape
+            // Generate 20 flowers in a 5x4 grid layout - centered
             const points = [];
-            const scaleX = 35;
-            const scaleY = 40;
-            const offsetX = 50;
-            const offsetY = 45;
-
-            for (let i = 0; i < 20; i++) {
-                const angle = (i / 20) * Math.PI * 2;
-                let x, y;
-
-                // Heart shape formula
-                x = 16 * Math.sin(angle) ** 3;
-                y = 13 * Math.cos(angle) - 5 * Math.cos(2 * angle) - 2 * Math.cos(3 * angle) - Math.cos(4 * angle);
-
-                points.push({
-                    x: offsetX + (x * scaleX),
-                    y: offsetY - (y * scaleY)
-                });
+            const cols = 5;
+            const rows = 4;
+            const spacingPx = 50; // pixels between flowers - increased spacing
+            
+            // Get actual container dimensions - use maxWidth from CSS as fallback
+            const container = document.querySelector('.flower-game-container');
+            if (!container) {
+                console.error('Flower container not found');
+                return points;
+            }
+            
+            let containerWidth = container.offsetWidth;
+            let containerHeight = container.offsetHeight;
+            
+            // If dimensions are 0, use computed style
+            if (containerWidth === 0 || containerHeight === 0) {
+                const styles = window.getComputedStyle(container);
+                containerWidth = parseFloat(styles.width) || 500;
+                containerHeight = parseFloat(styles.height) || 500;
+            }
+            
+            // Calculate grid dimensions in pixels
+            const gridWidthPx = (cols - 1) * spacingPx;
+            const gridHeightPx = (rows - 1) * spacingPx;
+            
+            // Calculate starting positions to center the grid (in pixels)
+            const startXPx = (containerWidth - gridWidthPx) / 2;
+            const startYPx = (containerHeight - gridHeightPx) / 2;
+            
+            // Generate positions in pixels first, then convert to percentages
+            let index = 0;
+            for (let row = 0; row < rows; row++) {
+                for (let col = 0; col < cols; col++) {
+                    if (index < 20) {
+                        const posXPx = startXPx + (col * spacingPx);
+                        const posYPx = startYPx + (row * spacingPx);
+                        
+                        // Convert to percentages
+                        points.push({
+                            x: (posXPx / containerWidth) * 100,
+                            y: (posYPx / containerHeight) * 100
+                        });
+                        index++;
+                    }
+                }
             }
 
             return points;
