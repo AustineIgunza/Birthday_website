@@ -1802,6 +1802,31 @@
             }
         }
 
+        @keyframes wishBoxReveal {
+            0% {
+                opacity: 0;
+                transform: scale(0.9) rotateX(45deg);
+            }
+            50% {
+                transform: scale(1.05) rotateX(0deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotateX(0deg);
+            }
+        }
+
+        @keyframes wishTextFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .wish-box {
             background: white;
             border-radius: 15px;
@@ -1841,6 +1866,7 @@
         .wish-box.revealed {
             background: linear-gradient(135deg, #FFF0F5, #FFE4E1);
             border: 2px solid var(--light-pink);
+            animation: wishBoxReveal 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .wish-box-emoji {
@@ -1861,12 +1887,13 @@
             opacity: 0;
             max-height: 0;
             overflow: hidden;
-            transition: all 0.5s ease;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .wish-box.revealed .wish-box-content {
             opacity: 1;
             max-height: 500px;
+            animation: wishTextFadeIn 0.7s ease-out 0.2s both;
         }
 
         .wish-box.revealed .wish-box-prompt {
@@ -1939,6 +1966,9 @@
 <body>
     <!-- BACK BUTTON (shared across pages) -->
     <button class="back-button" id="backButton" onclick="goBackButton()">← Back</button>
+
+    <!-- ASK ME AGAIN BUTTON (for page 2) -->
+    <button class="back-button" id="askAgainButton" onclick="goToPage1()" style="display: none;">Ask Me Again 💕</button>
 
     <!-- FLOATING HEARTS BACKGROUND -->
     <div class="floating-hearts" id="floatingHeartsContainer"></div>
@@ -2292,12 +2322,24 @@
             // Show selected page
             document.getElementById(pageId).classList.add('active');
 
-            // Show/hide back button
+            // Show/hide back button and ask me again button
             const backButton = document.getElementById('backButton');
+            const askAgainButton = document.getElementById('askAgainButton');
+            
             if (pageId === 'page1') {
                 backButton.classList.remove('visible');
+                if (askAgainButton) askAgainButton.classList.remove('visible');
+            } else if (pageId === 'page2') {
+                backButton.classList.remove('visible');
+                if (askAgainButton) askAgainButton.classList.add('visible');
             } else {
                 backButton.classList.add('visible');
+                if (askAgainButton) askAgainButton.classList.remove('visible');
+            }
+
+            // Reset wishes when leaving page 6
+            if (pageId !== 'page6') {
+                resetWishes();
             }
 
             // Control floating hearts visibility
@@ -2320,6 +2362,8 @@
                 createPageStars('page3Stars');
             } else if (pageId === 'page4') {
                 createPageStars('page4Stars');
+            } else if (pageId === 'page6') {
+                createPageStars('page6Stars');
             }
 
             // Scroll to top
@@ -2357,8 +2401,24 @@
 
         // ===== WISHES PAGE FUNCTIONS =====
         function revealWish(element) {
-            element.classList.add('revealed');
+            if (!element.classList.contains('revealed')) {
+                element.classList.add('revealed');
+                // Add a subtle pulse effect to the element
+                element.style.animation = 'none';
+                setTimeout(() => {
+                    element.style.animation = '';
+                }, 10);
+            }
         }
+
+        function resetWishes() {
+            const wishBoxes = document.querySelectorAll('.wish-box');
+            wishBoxes.forEach(box => {
+                box.classList.remove('revealed');
+            });
+        }
+
+        // ===== PHOTO MODAL FUNCTIONS =====
         const photoData = {
             1: {
                 image: './photos/birthday_image_1.JPG.jpeg',
