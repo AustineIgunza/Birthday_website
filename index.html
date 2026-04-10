@@ -1050,14 +1050,16 @@
             }
 
             .gifts-wrapper {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
                 gap: 1rem;
-                max-width: 400px;
+                max-width: 100%;
                 padding: 0 1rem;
             }
             
-            .gifts-wrapper .gift-card:nth-child(3) {
-                grid-column: auto;
+            .gifts-wrapper .gift-card:nth-child(5) {
+                grid-column: 1 / -1;
+                justify-self: center;
+                max-width: 300px;
             }
 
             .gift-card {
@@ -1067,18 +1069,35 @@
 
         @media (max-width: 480px) {
             .gifts-wrapper {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
                 gap: 0.8rem;
                 max-width: 100%;
                 padding: 0 1rem;
             }
             
-            .gifts-wrapper .gift-card:nth-child(3) {
-                grid-column: auto;
+            .gifts-wrapper .gift-card:nth-child(5) {
+                grid-column: 1 / -1;
+                justify-self: center;
+                max-width: 280px;
             }
 
             .gift-card {
                 max-width: 100%;
+                padding: 1rem;
+            }
+
+            .gift-card-icon {
+                min-height: 100px;
+                margin-bottom: 1rem;
+                font-size: 3rem;
+            }
+
+            .gift-card-title {
+                font-size: 1.2rem;
+            }
+
+            .gift-card-text {
+                font-size: 0.85rem;
             }
         }
 
