@@ -1581,6 +1581,156 @@
             }
         }
 
+        /* ===== PHOTO MODAL ===== */
+        @keyframes photoModalFadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes photoModalSlideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(40px) scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .photo-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 700;
+            padding: 2rem;
+            animation: photoModalFadeIn 0.3s ease;
+        }
+
+        .photo-modal-overlay.active {
+            display: flex;
+        }
+
+        .photo-modal-content {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(199, 21, 133, 0.3);
+            animation: photoModalSlideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+        }
+
+        .photo-modal-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #FFB6C1, #FF69B4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .photo-modal-caption {
+            padding: 2rem;
+            text-align: center;
+            background: white;
+        }
+
+        .photo-modal-caption h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--dark-pink);
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .photo-modal-caption p {
+            font-family: 'Lato', sans-serif;
+            font-size: 1rem;
+            color: var(--normal-pink);
+            line-height: 1.6;
+        }
+
+        .photo-modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark-pink);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .photo-modal-close:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        .clickable-photo-text {
+            cursor: pointer;
+            color: var(--bright-pink);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+        }
+
+        .clickable-photo-text:hover {
+            color: var(--dark-pink);
+            border-bottom-color: var(--bright-pink);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .photo-modal-content {
+                max-width: 100%;
+                border-radius: 15px;
+            }
+
+            .photo-modal-image {
+                height: 300px;
+            }
+
+            .photo-modal-caption {
+                padding: 1.5rem;
+            }
+
+            .photo-modal-caption h3 {
+                font-size: 1.4rem;
+            }
+
+            .photo-modal-close {
+                top: 1rem;
+                right: 1rem;
+                width: 36px;
+                height: 36px;
+                font-size: 1.3rem;
+            }
+        }
+
         /* ===== UTILITIES ===== */
         .hidden {
             display: none !important;
@@ -1773,25 +1923,32 @@
                 <h2 class="page4-heading">Our Favourite Moments 📸 💕</h2>
                 <div class="gallery-grid">
                     <div class="photo-card">
-                        <div class="photo-image" style="background-image: url('./photos/birthday_image_1.JPG.jpeg'); background-size: contain; background-position: center;"></div>
-                        <div class="photo-caption">The day I realized loving you is my deepest desire and the easiest thing to do 💕</div>
+                        <span class="clickable-photo-text" onclick="openPhotoModal(1)">First of many</span>
                     </div>
                     <div class="photo-card">
-                        <div class="photo-image" style="background-image: url('./photos/birthday_image_2.JPG.jpeg'); background-size: contain; background-position: center;"></div>
-                        <div class="photo-caption">Choosing each other every breath🫂</div>
+                        <span class="clickable-photo-text" onclick="openPhotoModal(2)">a night was had</span>
                     </div>
                     <div class="photo-card">
-                        <div class="photo-image" style="background-image: url('./photos/birthday_image_3.JPG.jpeg'); background-size: contain; background-position: center;"></div>
-                        <div class="photo-caption">We were lost but it was okay because we had each other🤭</div>
+                        <span class="clickable-photo-text" onclick="openPhotoModal(3)">In the woods</span>
                     </div>
                     <div class="photo-card">
-                        <div class="photo-image" style="background-image: url('./photos/birthday_image_4.JPG.jpeg'); background-size: contain; background-position: center;"></div>
-                        <div class="photo-caption">Your smile makes everything worth it 😘✨</div>
+                        <span class="clickable-photo-text" onclick="openPhotoModal(4)">double trouble</span>
                     </div>
                     <div class="photo-card">
-                        <div class="photo-image" style="background-image: url('./photos/birthday_image_5.JPG.jpeg'); background-size: contain; background-position: center;"></div>
-                        <div class="photo-caption">Doing life With you feels just right 💖</div>
+                        <span class="clickable-photo-text" onclick="openPhotoModal(5)">my favorite</span>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PHOTO MODAL -->
+        <div class="photo-modal-overlay" id="photoModalOverlay">
+            <div class="photo-modal-content">
+                <button class="photo-modal-close" onclick="closePhotoModal()">✕</button>
+                <div class="photo-modal-image" id="photoModalImage"></div>
+                <div class="photo-modal-caption">
+                    <h3 id="photoModalTitle"></h3>
+                    <p id="photoModalText"></p>
                 </div>
             </div>
         </div>
@@ -1933,6 +2090,60 @@
         function goToPage5() {
             showPage('page5');
         }
+
+        // ===== PHOTO MODAL FUNCTIONS =====
+        const photoData = {
+            1: {
+                image: './photos/birthday_image_1.JPG.jpeg',
+                title: 'First of many',
+                caption: 'The day I realized loving you is my deepest desire and the easiest thing to do 💕'
+            },
+            2: {
+                image: './photos/birthday_image_2.JPG.jpeg',
+                title: 'a night was had',
+                caption: 'Choosing each other every breath🫂'
+            },
+            3: {
+                image: './photos/birthday_image_3.JPG.jpeg',
+                title: 'In the woods',
+                caption: 'We were lost but it was okay because we had each other🤭'
+            },
+            4: {
+                image: './photos/birthday_image_4.JPG.jpeg',
+                title: 'double trouble',
+                caption: 'Your smile makes everything worth it 😘✨'
+            },
+            5: {
+                image: './photos/birthday_image_5.JPG.jpeg',
+                title: 'my favorite',
+                caption: 'Doing life With you feels just right 💖'
+            }
+        };
+
+        function openPhotoModal(photoNumber) {
+            const photo = photoData[photoNumber];
+            if (!photo) return;
+
+            document.getElementById('photoModalImage').style.backgroundImage = `url('${photo.image}')`;
+            document.getElementById('photoModalTitle').textContent = photo.title;
+            document.getElementById('photoModalText').textContent = photo.caption;
+            document.getElementById('photoModalOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePhotoModal() {
+            document.getElementById('photoModalOverlay').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('photoModalOverlay').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closePhotoModal();
+                }
+            });
+        });
 
         // ===== MODAL FUNCTIONS =====
         function openModal() {
